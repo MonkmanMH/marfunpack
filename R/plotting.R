@@ -1,0 +1,27 @@
+# assorted functions associated with plotting
+
+# fancy_ts
+# adds Y-axis gridlines at the maximum value of each group
+# 
+# from Gordon Shotwell @GShotwell
+# https://gist.github.com/GShotwell/b19ef520b6d56f61a830fabb3454965b
+# https://twitter.com/gshotwell/status/1574392590354505728?s=20&t=ACoGsq2bPLaj2IIjmCrD-g
+#
+fancy_ts <- function(df, val, group) {
+  labs <- df |> 
+    group_by({{group}}) |> 
+    summarize(breaks = max({{val}}))
+  
+  ggplot(df, 
+         aes(
+           x = date, 
+           y = {{val}}, 
+           group = {{group}}, 
+           color = {{group}})) +
+    geom_path() +
+    scale_y_continuous(breaks = labs$breaks, minor_breaks = NULL) +
+    theme_minimal()
+}
+
+
+
