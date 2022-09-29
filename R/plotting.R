@@ -7,14 +7,14 @@
 # https://gist.github.com/GShotwell/b19ef520b6d56f61a830fabb3454965b
 # https://twitter.com/gshotwell/status/1574392590354505728?s=20&t=ACoGsq2bPLaj2IIjmCrD-g
 #
-breaks_ts_max_grp <- function(df, val, group) {
+breaks_ts_max_grp <- function(df, date_var, val, group) {
   labs <- df |> 
     group_by({{group}}) |> 
     summarize(breaks = max({{val}}))
   
   ggplot(df, 
          aes(
-           x = date, 
+           x = {{date_var}}, 
            y = {{val}}, 
            group = {{group}}, 
            color = {{group}})) +
@@ -25,7 +25,7 @@ breaks_ts_max_grp <- function(df, val, group) {
 
 # Y axis breaks at the minimum & maximum values
 # modification of `breaks_ts_max_grp()` by Gordon Shotwell (above)
-breaks_ts_min_max <- function(df, val) {
+breaks_ts_min_max <- function(df, date_var, val) {
   labs <- df |>
     summarize(
       breaks = c(
@@ -34,7 +34,7 @@ breaks_ts_min_max <- function(df, val) {
       )
       
       ggplot(df,
-             aes(x = date,
+             aes(x = {{date_var}},
                  y = {{val}})) +
         geom_path() +
         scale_y_continuous(breaks = labs$breaks) +
