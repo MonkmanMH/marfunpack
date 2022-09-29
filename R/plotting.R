@@ -41,4 +41,22 @@ breaks_ts_min_max <- function(df, date_var, val) {
         theme_minimal()
 }
 
+# Y axis breaks at the first and last points in the series
+# modification of `breaks_ts_max_grp()` by Gordon Shotwell (above)
+breaks_ts_1_2 <- function(df, date_var, val) {
+  labs <- df |>
+    summarize(
+      breaks = c(
+        {{val}}[1],                 # first value
+        {{val}}[length({{val}})]    # last value in series
+      )
+      
+      ggplot(df,
+             aes(x = {{date_var}},
+                 y = {{val}})) +
+        geom_path() +
+        scale_y_continuous(breaks = labs$breaks) +
+        theme_minimal()
+}
+
 
