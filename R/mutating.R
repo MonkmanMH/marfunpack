@@ -34,3 +34,12 @@ get_pop_stats <- function(df) {
 }
 
 
+
+# CAGR (compound annual growth rate)
+calc_cagr <- function(val_var, period = length(val_var)) {
+  period = period - 1 # adjust to number of steps in the sequence
+  cagr = (((val_var[length(val_var)] / val_var[1])) ^ (1 / period)) - 1
+  return(cagr)
+}
+
+
