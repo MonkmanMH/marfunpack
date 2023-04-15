@@ -49,7 +49,7 @@ breaks_ts_1_2 <- function(df, date_var, val) {
       breaks = c(
         {{val}}[1],                 # first value
         {{val}}[length({{val}})]    # last value in series
-      )
+      ))
       
       ggplot(df,
              aes(x = {{date_var}},
