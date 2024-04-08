@@ -23,6 +23,7 @@ breaks_ts_max_grp <- function(df, date_var, val, group) {
     theme_minimal()
 }
 
+
 # Y axis breaks at the minimum & maximum values
 # modification of `breaks_ts_max_grp()` by Gordon Shotwell (above)
 breaks_ts_min_max <- function(df, date_var, val) {
@@ -57,6 +58,15 @@ breaks_ts_1_2 <- function(df, date_var, val) {
         geom_path() +
         scale_y_continuous(breaks = labs$breaks) +
         theme_minimal()
+}
+
+
+###---###
+
+# absolute value AND comma function
+# from https://stackoverflow.com/questions/37949473/how-do-you-make-ggplot-labels-use-both-labels-abs-and-labels-comma
+abs_comma <- function (x, ...) {
+  format(abs(x), ..., big.mark = ",", scientific = FALSE, trim = TRUE)
 }
 
 
