@@ -19,12 +19,6 @@ Once you have {marfunpack} installed, load it using the `library()` function:
 
 Utility function "not in"
 
-```
-x <- c(1, 2)
-
-dplyr::filter(c(1, 2, 3, 4), marfunpacktemp::%!in% x)
-
-```
 
 
 ## License
